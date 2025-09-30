@@ -1,9 +1,16 @@
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
-from langchain_ollama import ChatOllama
+# from langchain_openai import ChatOpenAI
+# from langchain_ollama import ChatOllama
+from langchain_groq import ChatGroq
+from langchain_google_vertexai import ChatVertexAI
+from langchain_google_genai import ChatGoogleGenerativeAI
+import os
+import re
 
-load_dotenv()
+load_dotenv(override=True)
+api_key=os.environ.get("Groq_key")
+google_api_key=os.environ.get("GEMINI_API_KEY")
 
 
 def main():
@@ -31,11 +38,14 @@ Musk's political activities, views, and statements have made him a polarizing fi
     )
 
     # llm = ChatOllama(temperature=0, model="gemma3:270m")
-    llm = ChatOpenAI(temperature=0, model="gpt-5")
-    chain = summary_prompt_template | llm
+    # llm=ChatGoogleGenerativeAI(model="gemini-2.0-flash",api_key=google_api_key)
+    llm = ChatGroq(temperature=0,api_key=api_key ,model="deepseek-r1-distill-llama-70b")
+    chain = summary_prompt_template | llm # LCEL(LangChain Expression language)
 
     response = chain.invoke(input={"information": information})
-    print(response.content)
+    # print(response.content)
+    cleaned = re.sub(r"<think>.*?</think>", "", response.content, flags=re.DOTALL)
+    print(cleaned)
 
 if __name__ == "__main__":
     main()
