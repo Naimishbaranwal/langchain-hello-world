@@ -19,14 +19,14 @@ google_api_key=os.environ.get("GEMINI_API_KEY")
 
 tools=[TavilySearch()]
 models={
-    # "a": "qwen/qwen3-32b",
+    "a": "qwen/qwen3-32b",
     # "b": "gemma2-9b-it",
     # "c": "llama-3.3-70b-versatile",
     # "d": "llama-3.1-8b-instant",
     # "e": "groq/compound",
     # "f": "openai/gpt-oss-120b",
     # "g": "moonshotai/kimi-k2-instruct",
-    "h":"openai/gpt-oss-120b",
+    # "h":"openai/gpt-oss-120b",
     # "i": "deepseek-r1-distill-llama-70b",
     # "j":"meta-llama/llama-4-maverick-17b-128e-instruct",
     # "k":"meta-llama/llama-guard-4-12b"#no tool calling support
