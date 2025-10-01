@@ -5,12 +5,15 @@ from langchain_core.prompts import PromptTemplate
 from langchain_groq import ChatGroq
 from langchain_google_vertexai import ChatVertexAI
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import ChatOpenAI
+from perplexity_llm_wrapper import PerplexityLLM
 import os
 import re
 
 load_dotenv(override=True)
 api_key=os.environ.get("Groq_key")
 google_api_key=os.environ.get("GEMINI_API_KEY")
+api_key_perplexity=os.environ.get("perplexity_key")
 
 
 def main():
@@ -39,7 +42,8 @@ Musk's political activities, views, and statements have made him a polarizing fi
 
     # llm = ChatOllama(temperature=0, model="gemma3:270m")
     # llm=ChatGoogleGenerativeAI(model="gemini-2.0-flash",api_key=google_api_key)
-    llm = ChatGroq(temperature=0,api_key=api_key ,model="llama-3.3-70b-versatile")
+    # llm=PerplexityLLM(api_key=api_key_perplexity)
+    llm = ChatGroq(temperature=0,api_key=api_key ,model="openai/gpt-oss-120b")
     chain = summary_prompt_template | llm # LCEL(LangChain Expression language)
 
     response = chain.invoke(input={"information": information})
