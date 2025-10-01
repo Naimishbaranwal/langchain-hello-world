@@ -39,13 +39,13 @@ Musk's political activities, views, and statements have made him a polarizing fi
 
     # llm = ChatOllama(temperature=0, model="gemma3:270m")
     # llm=ChatGoogleGenerativeAI(model="gemini-2.0-flash",api_key=google_api_key)
-    llm = ChatGroq(temperature=0,api_key=api_key ,model="deepseek-r1-distill-llama-70b")
+    llm = ChatGroq(temperature=0,api_key=api_key ,model="llama-3.3-70b-versatile")
     chain = summary_prompt_template | llm # LCEL(LangChain Expression language)
 
     response = chain.invoke(input={"information": information})
-    # print(response.content)
-    cleaned = re.sub(r"<think>.*?</think>", "", response.content, flags=re.DOTALL)
-    print(cleaned)
+    print(response.content)
+    # cleaned = re.sub(r"<think>.*?</think>", "", response.content, flags=re.DOTALL)
+    # print(cleaned)
 
 if __name__ == "__main__":
     main()
